@@ -1,4 +1,4 @@
-_sysget()
+_nvs()
 {
 	local cur prev opts
 	COMPREPLY=()
@@ -8,4 +8,4 @@ _sysget()
 
 	COMPREPLY=( $(compgen -W "${opts}" ${cur}) )
 }
-complete -F _sysget sysget
+complete -F _nvs nvs

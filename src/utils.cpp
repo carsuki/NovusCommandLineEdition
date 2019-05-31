@@ -9,7 +9,7 @@ bool file_exists(const char *filename) {
 }
 
 vector<string> GetPackageManagerList() {
-	vector<string> PackageManagerList = { "apt", "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "pkg_mgr", "chromebrew", "homebrew", "nix", "snap", "npm", "flatpak", "slapt-get", "pip3", "guix", "gem", "port" };
+	vector<string> PackageManagerList = { "apt-get"};
 	return PackageManagerList;
 }
 
@@ -42,7 +42,7 @@ string GetPackageManager(string filename) {
 }
 
 void CreateConf(string filename, string packagemanager) {
-	system("mkdir -p /etc/sysget");
+	system("mkdir -p /usr/local/etc/nvs");
 	ofstream file(filename);
 	if(file.is_open()) {
 		file << packagemanager;

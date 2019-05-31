@@ -8,19 +8,14 @@
 #include "packagemanager.hpp"
 #include "utils.hpp"
 
-// Use secure_getenv when compiling for Linux
-#ifdef __linux__
-	#define getenv secure_getenv
-#endif
-
 // Default path for config files
-string ConfigPath = "/etc/sysget/sysget";
-string CustomPath = "/etc/sysget/custom";
-string ArgsPath = "/etc/sysget/args";
+string ConfigPath = "/usr/local/etc/nvs/nvs";
+string CustomPath = "/usr/local/etc/nvs/custom";
+string ArgsPath = "/usr/local/etc/nvs/args";
 
 const char *HelpMsg =
-	"Help of sysget\n"
-	"sysget [OPTION] [PACKAGE(S)]\n"
+	"Help of Novus Commnad Line Edition\n"
+	"nvs [OPTION] [PACKAGE(S)]\n"
 	"\n"
 	"search [QUERY]\t\t\tsearch for a package in the resporitories\n"
 	"install [PACKAGE] [PACKAGE]\tinstall a package from the repos\n"
