@@ -30,9 +30,9 @@ const char *HelpMsg =
 	"about\t\t\t\tview legal informations\n\n";
 
 const char *AboutMsg =
-	"About sysget\n"
-	"Copyright (C) 2018-2019 Emil Engler et al.\n"
-	"http://sysget.emilengler.com\n"
+	"About Novus Command Line Edition\n"
+	"Copyright (C) 2019 Polar Development.\n"
+	"http://randomlink.com\n"
 	"\n"
 	"This program is free software: you can redistribute it and/or modify\n"
 	"it under the terms of the GNU General Public License as published by\n"
@@ -45,7 +45,15 @@ const char *AboutMsg =
 	"GNU General Public License for more details.\n"
 	"\n"
 	"You should have received a copy of the GNU General Public License\n"
-	"along with this program.  If not, see <http://www.gnu.org/licenses/>.\n";
+	"along with this program.  If not, see <http://www.gnu.org/licenses/>.\n"
+	"\n"
+	"Novus Command Line Edition is made possible by the following software: \n"
+	"\n"
+	"APT & APT-get by Debian: https://packages.debian.org/stretch/apt"
+	"\n"
+	"Sysget by Emil Engler: http://sysget.emilengler.com"
+	"\n"
+	"Project Serna by Diego Magdaleno & Diatrus: http://serna.diegomagdaleno.me/";
 
 
 // Default syntax operations

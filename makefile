@@ -29,4 +29,4 @@ uninstall:
 
 clean:
 	rm -rf *.o src/*.gch
-	rm -rf sysget
+	rm -rf nvs
