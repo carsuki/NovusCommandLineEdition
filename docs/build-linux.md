@@ -1,4 +1,4 @@
-# Build on Linux (g++)
+# Build on Linux (Debian Only) (g++)
 ### Dependencies
 For building sysget on Linux you need no third-party dependecies.<br>
 sysget is built with the standard C++ library only<br>
