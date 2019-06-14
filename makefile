@@ -1,5 +1,5 @@
 FLAGS=-std=c++11 -Wall -Wextra -Wpedantic
-INSTALLDEST=/usr/local/bin/
+DESTDIR=$
 CCP=g++
 
 prog: main.o packagemanager.o utils.o
@@ -15,12 +15,13 @@ utils.o: src/utils.hpp src/utils.cpp
 	$(CCP) $(FLAGS) -c src/utils.hpp src/utils.cpp
 
 install:
-	cp nvs $(INSTALLDEST)
-	mkdir -p /usr/local/man/man8
-	mkdir -p /usr/local/etc/nvs
-	mkdir -p /usr/local/etc/bash_completion.d/nvs
-	cp additional_resources/nvs /usr/local/etc/nvs/nvs
-	cp contrib/nvs.bash-completion /usr/local/etc/bash_completion.d/nvs
+	mkdir -p $(DESTDIR)/usr/local/bin/
+	cp nvs $(DESTDIR)/usr/local/bin/
+	mkdir -p $(DESTDIR)/usr/local/man/man8
+	mkdir -p $(DESTDIR)/usr/local/etc/nvs
+	mkdir -p $(DESTDIR)/usr/local/etc/bash_completion.d/nvs
+	cp additional_resources/nvs $(DESTDIR)/usr/local/etc/nvs/nvs
+	cp contrib/nvs.bash-completion $(DESTDIR)/usr/local/etc/bash_completion.d/nvs
 
 uninstall:
 	rm -rf /usr/local/bin/nvs
