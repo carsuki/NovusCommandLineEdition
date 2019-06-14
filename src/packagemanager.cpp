@@ -10,13 +10,13 @@ void PackageManager::init(string pm) {
 		// apt-get
 		add = "sudo apt edit-sources";
 		search = "sudo apt-cache search ";
-		install = "sudo apt-get update && apt-get install ";
+		install = "sudo apt-get update && sudo apt-get install ";
 		uninstall = "sudo apt-get purge ";
 		autoremove = "sudo apt-get purge --autoremove";
 		update = "sudo apt-get update";
 		upgrade = "sudo apt-get upgrade";
 		upgrade_pkg = "sudo apt-get upgrade ";
-		clean = "sudo apt-get autoclean && apt-get clean";
+		clean = "sudo apt-get autoclean && sudo apt-get clean";
 	}
 }
 
