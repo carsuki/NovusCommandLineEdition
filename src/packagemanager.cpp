@@ -8,6 +8,7 @@ void PackageManager::init(string pm) {
 
 	if(pm == "apt-get") {
 		// apt-get
+		add = "apt edit-sources";
 		search = "apt-cache search ";
 		install = "apt-get update && apt-get install ";
 		uninstall = "apt-get purge ";

@@ -17,15 +17,14 @@ utils.o: src/utils.hpp src/utils.cpp
 install:
 	cp nvs $(INSTALLDEST)
 	mkdir -p /usr/local/man/man8
-	cp contrib/man/sysget.8 /usr/local/man/man8/sysget.8
-	gzip /usr/local/man/man8/sysget.8
-	cp contrib/sysget.bash-completion /usr/local/etc/bash_completion.d/nvs
+	mkdir -p /usr/local/etc/nvs
+	mkdir -p /usr/local/etc/bash_completion.d/nvs
+	cp additional_resources/nvs /usr/local/etc/nvs/nvs
+	cp contrib/nvs.bash-completion /usr/local/etc/bash_completion.d/nvs
 
 uninstall:
-	rm -rf /usr/local/bin/sysget
-	rm -rf /etc/sysget/
-	rm -rf /etc/bash_completion.d/sysget
-	rm -rf /usr/local/man/man8/sysget.8.gz
+	rm -rf /usr/local/bin/nvs
+	rm -rf /etc/bash_completion.d/nvs
 
 clean:
 	rm -rf *.o src/*.gch

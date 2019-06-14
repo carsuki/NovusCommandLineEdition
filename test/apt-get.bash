@@ -1,4 +1,4 @@
 #!/bin/bash
-mkdir -p /etc/sysget
-echo "apt-get" > /etc/sysget/sysget
-sysget search hello && sysget install hello && sysget upgrade hello && sysget remove hello && sysget update && sysget upgrade && sysget autoremove && sysget clean && echo "Test passed successfully"
+mkdir -p /usr/local/etc/nvs
+echo "apt-get" > /usr/local/etc/nvs/nvs
+nvs search hello && nvs install hello && nvs upgrade hello && nvs remove hello && nvs update && nvs upgrade && nvs autoremove && nvs clean && echo "Test passed successfully"

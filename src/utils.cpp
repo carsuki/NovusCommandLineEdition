@@ -77,7 +77,7 @@ vector<string> CustomArgs(string path) {
 		}
 
 		if(number_of_lines != 10) {
-			cerr << "Invalid sysget_args file" << endl;
+			cerr << "Invalid nvs_args file" << endl;
 			exit(1);
 		}
 

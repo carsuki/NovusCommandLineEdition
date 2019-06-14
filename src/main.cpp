@@ -20,12 +20,12 @@ const char *HelpMsg =
 	"search [QUERY]\t\t\tsearch for a package in the resporitories\n"
 	"install [PACKAGE] [PACKAGE]\tinstall a package from the repos\n"
 	"remove [PACKAGE] [PACKAGE]\tremoves a package\n"
+	"add-repo \t\t\tOpen the APT repo editor\n"
 	"autoremove\t\t\tremoves not needed packages (orphans)\n"
 	"update\t\t\t\tupdate the database\n"
 	"upgrade\t\t\t\tdo a system upgrade\n"
 	"upgrade [PACKAGE] [PACKAGE]\tupgrade a specific package\n"
 	"clean\t\t\t\tclean the download cache\n"
-	"set [NEW MANAGER]\t\tset a new package manager\n"
 	"help\t\t\t\topen this help page\n"
 	"about\t\t\t\tview legal informations\n\n";
 
@@ -60,6 +60,7 @@ const char *AboutMsg =
 vector<string> SearchCmds = {"search", "--search"};
 vector<string> InstallCmds = {"install", "--install"};
 vector<string> RemoveCmds = {"remove", "--remove"};
+vector<string> AddCmds= {"add", "--add"};
 vector<string> AutoremoveCmds = {"autoremove", "--autoremove"};
 vector<string> UpdateCmds = {"update", "--update"};
 vector<string> UpgradeCmds = {"upgrade", "--upgrade"};
@@ -155,6 +156,7 @@ int main(int argc, char* argv[]) {
 		c_args = CustomArgs(ArgsPath);
 		SearchCmds.push_back(c_args[0]);
 		InstallCmds.push_back(c_args[1]);
+		AddCmds.push_back(c_args[1]);
 		RemoveCmds.push_back(c_args[2]);
 		AutoremoveCmds.push_back(c_args[3]);
 		UpdateCmds.push_back(c_args[4]);
@@ -168,7 +170,7 @@ int main(int argc, char* argv[]) {
 	// Now parse the console arguments
 	// If the user enters no operation
 	if(argc < 2) {
-		cerr << "Error you need an operation." << endl << "Try sysget help" << endl;
+		cerr << "Error you need an operation." << endl << "Try nvs help" << endl;
 		exit(1);
 	}
 
@@ -198,6 +200,17 @@ int main(int argc, char* argv[]) {
 		}
 
 		system(string(pm.install + execcmd).c_str());
+	}
+
+	//If the user wants to add a repo
+	else if(VectorContains(cmd, AddCmds)) {
+		for(int i = 2; i < argc; i++) {
+			checkcmd(pm.add);
+			execcmd = execcmd + argv[i] + " ";
+		}
+
+		system(string(pm.add + execcmd).c_str());
+		
 	}
 
 	else if(VectorContains(cmd, RemoveCmds)) {
@@ -256,18 +269,18 @@ int main(int argc, char* argv[]) {
 	// Set will change the package manager
 	else if(VectorContains(cmd, SetCmds)) {
 		if(argc < 3) {
-			cerr << "Error, no new package manager provided" << endl;
+			cerr << "Setting up a package manager on Novus Commnand Line Edition is deprecated. Please use default Sysget installation." << endl;
 			exit(1);
 		}
 
 		if(remove(ConfigPath.c_str()) != 0) {
-			cerr << "Error while deleting config file, are you root ?" << endl;
+			cerr << "Setting up a package manager on Novus Commnand Line Edition is deprecated. Please use default Sysget installation." << endl;
 			exit(1);
 		}
 
 		else {
 			CreateConf(ConfigPath, string(argv[2]) + "\n");
-			cout << "Package manager changed to " << argv[2] << endl;
+			cout << "Setting up a package manager on Novus Commnand Line Edition is deprecated. Please use default Sysget installation." << argv[2] << endl;
 		}
 	}
 
@@ -282,7 +295,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	else {
-		cerr << "Unknown operation '" << cmd << "'. Try sysget help" << endl;
+		cerr << "Unknown operation '" << cmd << "'. Try nvs help" << endl;
 		exit(1);
 	}
 }
