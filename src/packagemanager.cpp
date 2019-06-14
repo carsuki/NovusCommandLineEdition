@@ -8,15 +8,15 @@ void PackageManager::init(string pm) {
 
 	if(pm == "apt-get") {
 		// apt-get
-		add = "apt edit-sources";
-		search = "apt-cache search ";
-		install = "apt-get update && apt-get install ";
-		uninstall = "apt-get purge ";
-		autoremove = "apt-get purge --autoremove";
-		update = "apt-get update";
-		upgrade = "apt-get upgrade";
-		upgrade_pkg = "apt-get upgrade ";
-		clean = "apt-get autoclean && apt-get clean";
+		add = "sudo apt edit-sources";
+		search = "sudo apt-cache search ";
+		install = "sudo apt-get update && apt-get install ";
+		uninstall = "sudo apt-get purge ";
+		autoremove = "sudo apt-get purge --autoremove";
+		update = "sudo apt-get update";
+		upgrade = "sudo apt-get upgrade";
+		upgrade_pkg = "sudo apt-get upgrade ";
+		clean = "sudo apt-get autoclean && apt-get clean";
 	}
 }
 
