@@ -11,6 +11,7 @@ void PackageManager::init(string pm) {
 		add = "sudo apt edit-sources";
 		search = "sudo apt-cache search ";
 		install = "sudo apt-get update && sudo apt-get install ";
+		reinstall = "sudo apt-get update && sudo apt-get reinstall ";
 		uninstall = "sudo apt-get purge ";
 		autoremove = "sudo apt-get purge --autoremove";
 		update = "sudo apt-get update";
@@ -34,6 +35,7 @@ void PackageManager::customPM(string filename) {
 		if(number_of_lines != 8) {
 			search = "exit=Invalid custom file";
 			install = "exit=Invalid custom file";
+			reinstall = "exit=Invalid custom file";
 			uninstall = "exit=Invalid custom file";
 			autoremove = "exit=Invalid custom file";
 			update = "exit=Invalid custom file";
@@ -45,12 +47,13 @@ void PackageManager::customPM(string filename) {
 		else {
 			search = commands[0];
 			install = commands[1];
-			uninstall = commands[2];
-			autoremove = commands[3];
-			update = commands[4];
-			upgrade = commands[5];
-			upgrade_pkg = commands[6];
-			clean = commands[7];
+			reinstall = commands[2];
+			uninstall = commands[3];
+			autoremove = commands[4];
+			update = commands[5];
+			upgrade = commands[6];
+			upgrade_pkg = commands[7];
+			clean = commands[8];
 		}
 	}
 }

@@ -14,23 +14,23 @@ string CustomPath = "/usr/local/etc/nvs/custom";
 string ArgsPath = "/usr/local/etc/nvs/args";
 
 const char *HelpMsg =
-	"Help of Novus Commnad Line Edition\n"
-	"nvs [OPTION] [PACKAGE(S)]\n"
+	"Novus CLI Help\n"
+	"nvs [command] <query>\n"
 	"\n"
-	"search [QUERY]\t\t\tsearch for a package in the resporitories\n"
-	"install [PACKAGE] [PACKAGE]\tinstall a package from the repos\n"
-	"remove [PACKAGE] [PACKAGE]\tremoves a package\n"
-	"add-repo \t\t\tOpen the APT repo editor\n"
-	"autoremove\t\t\tremoves not needed packages (orphans)\n"
-	"update\t\t\t\tupdate the database\n"
-	"upgrade\t\t\t\tdo a system upgrade\n"
-	"upgrade [PACKAGE] [PACKAGE]\tupgrade a specific package\n"
-	"clean\t\t\t\tclean the download cache\n"
-	"help\t\t\t\topen this help page\n"
-	"about\t\t\t\tview legal informations\n\n";
+	"search [query]\t\t\tSearches for a package in your resporitories\n"
+	"install [package]\t\tInstalls a package\n"
+	"reinstall [package]\t\tReinstalls a package\n"
+	"remove [package]\t\tRemoves a package\n"
+	"edit-sources\t\t\tOpens the APT repo editor\n"
+	"autoremove\t\t\tRemoves unneeded packages (orphans)\n"
+	"update\t\t\t\tUpdate the repo lists\n"
+	"upgrade\t\t\t\tUpgrade all packages\n"
+	"clean\t\t\t\tClear the download cache\n"
+	"help\t\t\t\tOpen this help page\n"
+	"about\t\t\t\tView legal information\n";
 
 const char *AboutMsg =
-	"About Novus Command Line Edition\n"
+	"About Novus CLI\n"
 	"Copyright (C) 2019 Polar Development.\n"
 	"http://randomlink.com\n"
 	"\n"
@@ -47,20 +47,21 @@ const char *AboutMsg =
 	"You should have received a copy of the GNU General Public License\n"
 	"along with this program.  If not, see <http://www.gnu.org/licenses/>.\n"
 	"\n"
-	"Novus Command Line Edition is made possible by the following software: \n"
+	"Novus CLI is made possible by the following software: \n"
 	"\n"
 	"APT & APT-get by Debian: https://packages.debian.org/stretch/apt"
 	"\n"
 	"Sysget by Emil Engler: http://sysget.emilengler.com"
 	"\n"
-	"Project Serna by Diego Magdaleno & Diatrus: http://serna.diegomagdaleno.me/";
+	"Project Serna by Diego Magdaleno & Diatrus: https://sernarepo.com/";
 
 
 // Default syntax operations
 vector<string> SearchCmds = {"search", "--search"};
 vector<string> InstallCmds = {"install", "--install"};
+vector<string> ReinstallCmds = {"reinstall", "--reinstall"};
 vector<string> RemoveCmds = {"remove", "--remove"};
-vector<string> AddCmds= {"add", "--add"};
+vector<string> AddCmds= {"edit-sources", "--edit-sources"};
 vector<string> AutoremoveCmds = {"autoremove", "--autoremove"};
 vector<string> UpdateCmds = {"update", "--update"};
 vector<string> UpgradeCmds = {"upgrade", "--upgrade"};
@@ -156,6 +157,7 @@ int main(int argc, char* argv[]) {
 		c_args = CustomArgs(ArgsPath);
 		SearchCmds.push_back(c_args[0]);
 		InstallCmds.push_back(c_args[1]);
+        ReinstallCmds.push_back(c_args[1]);
 		AddCmds.push_back(c_args[1]);
 		RemoveCmds.push_back(c_args[2]);
 		AutoremoveCmds.push_back(c_args[3]);
@@ -201,6 +203,21 @@ int main(int argc, char* argv[]) {
 
 		system(string(pm.install + execcmd).c_str());
 	}
+    
+    else if(VectorContains(cmd, ReinstallCmds)) {
+        // If the user enters no package to install
+        if(argc < 3) {
+            cerr << "Error, no package for the reinstallation provided" << endl;
+            exit(1);
+        }
+        
+        for(int i = 2; i < argc; i++) {
+            checkcmd(pm.reinstall);
+            execcmd = execcmd + argv[i] + " ";
+        }
+        
+        system(string(pm.reinstall + execcmd).c_str());
+    }
 
 	//If the user wants to add a repo
 	else if(VectorContains(cmd, AddCmds)) {
