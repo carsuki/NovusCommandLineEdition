@@ -339,5 +339,6 @@ ASALocalRun/
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# Diatrus added these
+# Diatrus added these, and Diego the other
 build
+*.gch #Ignore SRCBuild files
