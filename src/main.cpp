@@ -64,7 +64,6 @@ vector<string> AddCmds= {"edit-sources", "--edit-sources"};
 vector<string> AutoremoveCmds = {"autoremove", "--autoremove"};
 vector<string> UpgradeCmds = {"upgrade", "--upgrade"};
 vector<string> CleanCmds = {"clean", "--clean"};
-vector<string> SetCmds = {"set", "--set"};
 vector<string> HelpCmds = {"help", "--help"};
 vector<string> AboutCmds = {"about", "--about"};
 
@@ -161,7 +160,6 @@ int main(int argc, char* argv[]) {
 		AutoremoveCmds.push_back(c_args[3]);
 		UpgradeCmds.push_back(c_args[5]);
 		CleanCmds.push_back(c_args[6]);
-		SetCmds.push_back(c_args[7]);
 		HelpCmds.push_back(c_args[8]);
 		AboutCmds.push_back(c_args[9]);
 	}
@@ -272,24 +270,6 @@ int main(int argc, char* argv[]) {
 	else if(VectorContains(cmd, CleanCmds)) {
 		checkcmd(pm.clean);
 		system(pm.clean.c_str());
-	}
-
-	// Set will change the package manager
-	else if(VectorContains(cmd, SetCmds)) {
-		if(argc < 3) {
-			cerr << "Setting up a package manager on Novus Commnand Line Edition is deprecated. Please use default Sysget installation." << endl;
-			exit(1);
-		}
-
-		if(remove(ConfigPath.c_str()) != 0) {
-			cerr << "Setting up a package manager on Novus Commnand Line Edition is deprecated. Please use default Sysget installation." << endl;
-			exit(1);
-		}
-
-		else {
-			CreateConf(ConfigPath, string(argv[2]) + "\n");
-			cout << "Setting up a package manager on Novus Commnand Line Edition is deprecated. Please use default Sysget installation." << argv[2] << endl;
-		}
 	}
 
 	// Help
