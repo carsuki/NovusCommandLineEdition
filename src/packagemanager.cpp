@@ -30,27 +30,5 @@ void PackageManager::customPM(string filename) {
 			commands.push_back(line);
 			number_of_lines++;
 		}
-
-		if(number_of_lines != 8) {
-			search = "exit=Invalid custom file";
-			install = "exit=Invalid custom file";
-			reinstall = "exit=Invalid custom file";
-			uninstall = "exit=Invalid custom file";
-			autoremove = "exit=Invalid custom file";
-			upgrade = "exit=Invalid custom file";
-			upgrade_pkg = "exit=Invalid custom file";
-			clean = "exit=Invalid custom file";
-		}
-		
-		else {
-			search = commands[0];
-			install = commands[1];
-			reinstall = commands[2];
-			uninstall = commands[3];
-			autoremove = commands[4];
-			upgrade = commands[6];
-			upgrade_pkg = commands[7];
-			clean = commands[8];
-		}
-	}
+	}	
 }
