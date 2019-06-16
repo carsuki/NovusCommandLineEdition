@@ -22,6 +22,7 @@ const char *HelpMsg =
 	"remove [package]\t\tRemoves a package\n"
 	"edit-sources\t\t\tOpens the APT repo editor\n"
 	"autoremove\t\t\tRemoves unneeded packages (orphans)\n"
+	"update\t\t\t\tUpdate the repo lists\n"		
 	"upgrade\t\t\t\tUpgrade all packages\n"
 	"clean\t\t\t\tClear the download cache\n"
 	"help\t\t\t\tOpen this help page\n"
@@ -62,6 +63,7 @@ vector<string> RemoveCmds = {"remove", "--remove"};
 vector<string> AddCmds= {"edit-sources", "--edit-sources"};
 vector<string> AutoremoveCmds = {"autoremove", "--autoremove"};
 vector<string> UpgradeCmds = {"upgrade", "--upgrade"};
+vector<string> UpdateCmds = {"update", "--update"};	
 vector<string> CleanCmds = {"clean", "--clean"};
 vector<string> HelpCmds = {"help", "--help"};
 vector<string> AboutCmds = {"about", "--about"};
@@ -249,6 +251,14 @@ int main(int argc, char* argv[]) {
 		checkcmd(pm.clean);
 		system(pm.clean.c_str());
 	}
+
+	
+    // Update will only refresh the database		
+ 	else if(VectorContains(cmd, UpdateCmds)) {		
+ 		checkcmd(pm.update);		
+ 		system(pm.update.c_str());		
+ 	}		
+
 
 	// Help
 	else if(VectorContains(cmd, HelpCmds)) {

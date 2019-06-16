@@ -15,6 +15,7 @@ void PackageManager::init(string pm) {
 		uninstall = "sudo apt-get purge ";
 		autoremove = "sudo apt-get purge --autoremove";
 		upgrade = "sudo apt-get update && sudo apt-get upgrade";
+		update = "sudo apt-get update";		
 		upgrade_pkg = "sudo apt-get upgrade ";
 		clean = "sudo apt-get autoclean && sudo apt-get clean";
 	}
