@@ -11,7 +11,6 @@
 // Default path for config files
 string ConfigPath = "/usr/local/etc/nvs/nvs";
 string CustomPath = "/usr/local/etc/nvs/custom";
-string ArgsPath = "/usr/local/etc/nvs/args";
 
 const char *HelpMsg =
 	"Novus CLI Help\n"
@@ -73,7 +72,6 @@ int main(int argc, char* argv[]) {
 	// Get the path if the user has changed it with an enviroment variable
 	char* EnvConfigPath = getenv("SYSGET_CONFIG_PATH");
 	char* EnvCustomPath = getenv("SYSGET_CUSTOM_PATH");
-	char* EnvArgsPath = getenv("SYSGET_ARGS_PATH");
 
 	// Check if the enviroment variables aren't empty
 	if(EnvConfigPath != NULL) {
@@ -82,10 +80,6 @@ int main(int argc, char* argv[]) {
 
 	if(EnvCustomPath != NULL) {
 		CustomPath = string(EnvCustomPath);
-	}
-
-	if(EnvArgsPath != NULL) {
-		ArgsPath = string(EnvArgsPath);
 	}
 	
 	// Create a config file if the config file does not exists
@@ -146,21 +140,6 @@ int main(int argc, char* argv[]) {
 	// If sysget_config does not exists use defaults
 	else {
 		pm.init(pm_config);
-	}
-
-	// If the user declares his own input commands
-	if(file_exists(ArgsPath.c_str())) {
-		vector<string> c_args;	// If the user changes the layout of sysget
-		SearchCmds.push_back(c_args[0]);
-		InstallCmds.push_back(c_args[1]);
-        ReinstallCmds.push_back(c_args[1]);
-		AddCmds.push_back(c_args[1]);
-		RemoveCmds.push_back(c_args[2]);
-		AutoremoveCmds.push_back(c_args[3]);
-		UpgradeCmds.push_back(c_args[5]);
-		CleanCmds.push_back(c_args[6]);
-		HelpCmds.push_back(c_args[8]);
-		AboutCmds.push_back(c_args[9]);
 	}
 
 	// Now parse the console arguments
