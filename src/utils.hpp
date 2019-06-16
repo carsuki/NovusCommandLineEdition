@@ -16,6 +16,5 @@ vector<string> GetPackageManagerList();
 string GetPackageManager(string filename);
 void CreateConf(string filename, string packagemanager);
 void checkcmd(string cmd);
-vector<string> CustomArgs(string path);
 bool VectorContains(string s, vector<string> v);
 #endif

@@ -151,7 +151,6 @@ int main(int argc, char* argv[]) {
 	// If the user declares his own input commands
 	if(file_exists(ArgsPath.c_str())) {
 		vector<string> c_args;	// If the user changes the layout of sysget
-		c_args = CustomArgs(ArgsPath);
 		SearchCmds.push_back(c_args[0]);
 		InstallCmds.push_back(c_args[1]);
         ReinstallCmds.push_back(c_args[1]);
