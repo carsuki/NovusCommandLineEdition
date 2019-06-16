@@ -14,8 +14,7 @@ void PackageManager::init(string pm) {
 		reinstall = "sudo apt-get update && sudo apt-get reinstall ";
 		uninstall = "sudo apt-get purge ";
 		autoremove = "sudo apt-get purge --autoremove";
-		update = "sudo apt-get update";
-		upgrade = "sudo apt-get upgrade";
+		upgrade = "sudo apt-get update && sudo apt-get upgrade";
 		upgrade_pkg = "sudo apt-get upgrade ";
 		clean = "sudo apt-get autoclean && sudo apt-get clean";
 	}
@@ -38,7 +37,6 @@ void PackageManager::customPM(string filename) {
 			reinstall = "exit=Invalid custom file";
 			uninstall = "exit=Invalid custom file";
 			autoremove = "exit=Invalid custom file";
-			update = "exit=Invalid custom file";
 			upgrade = "exit=Invalid custom file";
 			upgrade_pkg = "exit=Invalid custom file";
 			clean = "exit=Invalid custom file";
@@ -50,7 +48,6 @@ void PackageManager::customPM(string filename) {
 			reinstall = commands[2];
 			uninstall = commands[3];
 			autoremove = commands[4];
-			update = commands[5];
 			upgrade = commands[6];
 			upgrade_pkg = commands[7];
 			clean = commands[8];

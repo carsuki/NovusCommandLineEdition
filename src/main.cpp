@@ -23,7 +23,6 @@ const char *HelpMsg =
 	"remove [package]\t\tRemoves a package\n"
 	"edit-sources\t\t\tOpens the APT repo editor\n"
 	"autoremove\t\t\tRemoves unneeded packages (orphans)\n"
-	"update\t\t\t\tUpdate the repo lists\n"
 	"upgrade\t\t\t\tUpgrade all packages\n"
 	"clean\t\t\t\tClear the download cache\n"
 	"help\t\t\t\tOpen this help page\n"
@@ -63,7 +62,6 @@ vector<string> ReinstallCmds = {"reinstall", "--reinstall"};
 vector<string> RemoveCmds = {"remove", "--remove"};
 vector<string> AddCmds= {"edit-sources", "--edit-sources"};
 vector<string> AutoremoveCmds = {"autoremove", "--autoremove"};
-vector<string> UpdateCmds = {"update", "--update"};
 vector<string> UpgradeCmds = {"upgrade", "--upgrade"};
 vector<string> CleanCmds = {"clean", "--clean"};
 vector<string> SetCmds = {"set", "--set"};
@@ -161,7 +159,6 @@ int main(int argc, char* argv[]) {
 		AddCmds.push_back(c_args[1]);
 		RemoveCmds.push_back(c_args[2]);
 		AutoremoveCmds.push_back(c_args[3]);
-		UpdateCmds.push_back(c_args[4]);
 		UpgradeCmds.push_back(c_args[5]);
 		CleanCmds.push_back(c_args[6]);
 		SetCmds.push_back(c_args[7]);
@@ -251,12 +248,6 @@ int main(int argc, char* argv[]) {
 	else if(VectorContains(cmd, AutoremoveCmds)) {
 		checkcmd(pm.autoremove);
 		system(pm.autoremove.c_str());
-	}
-
-	// Update will only refresh the database
-	else if(VectorContains(cmd, UpdateCmds)) {
-		checkcmd(pm.update);
-		system(pm.update.c_str());
 	}
 
 	// Upgrading will not update the database
