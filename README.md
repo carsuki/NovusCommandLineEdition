@@ -32,14 +32,13 @@
 - [Acknowledgments](#acknowledgement)
 
 ## 🧐 About <a name = "about"></a>
-Write about 1-2 paragraphs describing the purpose of your project.
+NovusCLI is a lite version of the full Novus package manager (Coming later this year) that allows users to start with a simple syntax, for their favorite APT package manager.
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
+Getting started for contributing to NovusCLI is very easy, you just need to follow the instructions below if you wish to build from source.
 
 ### Prerequisites
-What things you need to install the software and how to install them.
-
+In order to start
 ```
 Give examples
 ```
@@ -91,11 +90,11 @@ Add additional notes about how to deploy this on a live system.
 - [NodeJs](https://nodejs.org/en/) - Server Environment
 
 ## ✍️ Authors <a name = "authors"></a>
-- [@kylelobo](https://github.com/kylelobo) - Idea & Initial work
+- [@DiegoMagdaleno](https://github.com/DiegoMagdaIeno) - NVS build and implementation.
+- [@Diatrus](https://github.com/Diatrus) - Source code cleaning, better help commands.
 
 See also the list of [contributors](https://github.com/kylelobo/The-Documentation-Compendium/contributors) who participated in this project.
 
 ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
-- Hat tip to anyone whose code was used
-- Inspiration
-- References
+- [Sysget by emilengler](https://github.com/emilengler/sysget) 
+- [PacAPT by ICY](https://github.com/icy/pacapt)
