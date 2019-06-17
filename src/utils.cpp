@@ -9,7 +9,7 @@ bool file_exists(const char *filename) {
 }
 
 vector<string> GetPackageManagerList() {
-	vector<string> PackageManagerList = { "apt-get"};
+	vector<string> PackageManagerList = { "apt"};
 	return PackageManagerList;
 }
 
@@ -63,32 +63,6 @@ void checkcmd(string cmd) {
 		exit(1);
 	}
 }
-
-// Allows user to change the syntax of sysget
-vector<string> CustomArgs(string path) {
-	ifstream file(path);
-	string line;
-	vector<string> args;
-	int number_of_lines = 0;
-	if(file.is_open()) {
-		while(getline(file, line)) {
-			number_of_lines++;
-			args.push_back(line);
-		}
-
-		if(number_of_lines != 10) {
-			cerr << "Invalid nvs_args file" << endl;
-			exit(1);
-		}
-
-		else {
-			return args;
-		}
-
-	}
-	return args;
-}
-
 // Check if an item exists in a vector
 bool VectorContains(string s, vector<string> v) {
 	return std::find(v.begin(), v.end(), s) != v.end();

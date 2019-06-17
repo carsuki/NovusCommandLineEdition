@@ -11,23 +11,23 @@
 // Default path for config files
 string ConfigPath = "/usr/local/etc/nvs/nvs";
 string CustomPath = "/usr/local/etc/nvs/custom";
-string ArgsPath = "/usr/local/etc/nvs/args";
 
 const char *HelpMsg =
 	"Novus CLI Help\n"
 	"nvs [command] <query>\n"
 	"\n"
 	"search [query]\t\t\tSearches for a package in your resporitories\n"
+    "list\t\t\t\tLists all packages in your resporitories\n"
 	"install [package]\t\tInstalls a package\n"
 	"reinstall [package]\t\tReinstalls a package\n"
 	"remove [package]\t\tRemoves a package\n"
 	"edit-sources\t\t\tOpens the APT repo editor\n"
 	"autoremove\t\t\tRemoves unneeded packages (orphans)\n"
-	"update\t\t\t\tUpdate the repo lists\n"
+	"update\t\t\t\tUpdate the repo lists\n"		
 	"upgrade\t\t\t\tUpgrade all packages\n"
 	"clean\t\t\t\tClear the download cache\n"
 	"help\t\t\t\tOpen this help page\n"
-	"about\t\t\t\tView legal information\n";
+	"about\t\t\t\tView legal information\n\n";
 
 const char *AboutMsg =
 	"About Novus CLI\n"
@@ -58,15 +58,15 @@ const char *AboutMsg =
 
 // Default syntax operations
 vector<string> SearchCmds = {"search", "--search"};
+vector<string> ListCmds = {"list", "--list"};
 vector<string> InstallCmds = {"install", "--install"};
 vector<string> ReinstallCmds = {"reinstall", "--reinstall"};
 vector<string> RemoveCmds = {"remove", "--remove"};
 vector<string> AddCmds= {"edit-sources", "--edit-sources"};
 vector<string> AutoremoveCmds = {"autoremove", "--autoremove"};
-vector<string> UpdateCmds = {"update", "--update"};
 vector<string> UpgradeCmds = {"upgrade", "--upgrade"};
+vector<string> UpdateCmds = {"update", "--update"};	
 vector<string> CleanCmds = {"clean", "--clean"};
-vector<string> SetCmds = {"set", "--set"};
 vector<string> HelpCmds = {"help", "--help"};
 vector<string> AboutCmds = {"about", "--about"};
 
@@ -76,7 +76,6 @@ int main(int argc, char* argv[]) {
 	// Get the path if the user has changed it with an enviroment variable
 	char* EnvConfigPath = getenv("SYSGET_CONFIG_PATH");
 	char* EnvCustomPath = getenv("SYSGET_CUSTOM_PATH");
-	char* EnvArgsPath = getenv("SYSGET_ARGS_PATH");
 
 	// Check if the enviroment variables aren't empty
 	if(EnvConfigPath != NULL) {
@@ -85,10 +84,6 @@ int main(int argc, char* argv[]) {
 
 	if(EnvCustomPath != NULL) {
 		CustomPath = string(EnvCustomPath);
-	}
-
-	if(EnvArgsPath != NULL) {
-		ArgsPath = string(EnvArgsPath);
 	}
 	
 	// Create a config file if the config file does not exists
@@ -151,28 +146,11 @@ int main(int argc, char* argv[]) {
 		pm.init(pm_config);
 	}
 
-	// If the user declares his own input commands
-	if(file_exists(ArgsPath.c_str())) {
-		vector<string> c_args;	// If the user changes the layout of sysget
-		c_args = CustomArgs(ArgsPath);
-		SearchCmds.push_back(c_args[0]);
-		InstallCmds.push_back(c_args[1]);
-        ReinstallCmds.push_back(c_args[1]);
-		AddCmds.push_back(c_args[1]);
-		RemoveCmds.push_back(c_args[2]);
-		AutoremoveCmds.push_back(c_args[3]);
-		UpdateCmds.push_back(c_args[4]);
-		UpgradeCmds.push_back(c_args[5]);
-		CleanCmds.push_back(c_args[6]);
-		SetCmds.push_back(c_args[7]);
-		HelpCmds.push_back(c_args[8]);
-		AboutCmds.push_back(c_args[9]);
-	}
-
 	// Now parse the console arguments
 	// If the user enters no operation
 	if(argc < 2) {
-		cerr << "Error you need an operation." << endl << "Try nvs help" << endl;
+        cout << HelpMsg;
+        cerr << "Error, you need an operation." << endl;
 		exit(1);
 	}
 
@@ -188,6 +166,11 @@ int main(int argc, char* argv[]) {
 		checkcmd(pm.search);
 		system(string(pm.search + argv[2]).c_str());
 	}
+    
+    if(VectorContains(cmd, ListCmds)) {
+        checkcmd(pm.list);
+        system(pm.list.c_str());
+    }
 
 	else if(VectorContains(cmd, InstallCmds)) {
 		// If the user enters no package to install
@@ -253,12 +236,6 @@ int main(int argc, char* argv[]) {
 		system(pm.autoremove.c_str());
 	}
 
-	// Update will only refresh the database
-	else if(VectorContains(cmd, UpdateCmds)) {
-		checkcmd(pm.update);
-		system(pm.update.c_str());
-	}
-
 	// Upgrading will not update the database
 	else if(VectorContains(cmd, UpgradeCmds)) {
 		if(argc < 3) {
@@ -283,23 +260,13 @@ int main(int argc, char* argv[]) {
 		system(pm.clean.c_str());
 	}
 
-	// Set will change the package manager
-	else if(VectorContains(cmd, SetCmds)) {
-		if(argc < 3) {
-			cerr << "Setting up a package manager on Novus Commnand Line Edition is deprecated. Please use default Sysget installation." << endl;
-			exit(1);
-		}
+	
+    // Update will only refresh the database		
+ 	else if(VectorContains(cmd, UpdateCmds)) {		
+ 		checkcmd(pm.update);		
+ 		system(pm.update.c_str());		
+ 	}		
 
-		if(remove(ConfigPath.c_str()) != 0) {
-			cerr << "Setting up a package manager on Novus Commnand Line Edition is deprecated. Please use default Sysget installation." << endl;
-			exit(1);
-		}
-
-		else {
-			CreateConf(ConfigPath, string(argv[2]) + "\n");
-			cout << "Setting up a package manager on Novus Commnand Line Edition is deprecated. Please use default Sysget installation." << argv[2] << endl;
-		}
-	}
 
 	// Help
 	else if(VectorContains(cmd, HelpCmds)) {
