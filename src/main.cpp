@@ -18,7 +18,7 @@ string ConfigPath = "/usr/local/etc/nvs/nvs";
 string CustomPath = "/usr/local/etc/nvs/custom";
 
 //This is the default help message that gets displayed when user types the nvs help command.
-const char * HelpMsg =
+const char * HelpMsg = 
   "Novus CLI Help\n"
 "nvs [command] <query>\n"
 "\n"
