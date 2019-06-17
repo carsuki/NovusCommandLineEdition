@@ -18,8 +18,6 @@ void PackageManager::init(string pm) {
 		upgrade = "sudo apt update && sudo apt upgrade";
 		upgrade_pkg = "sudo apt upgrade ";
         add = "sudo apt edit-sources ";
-        info = "sudo apt info ";
-        upgradable = "sudo apt list --upgradable";
 		clean = "sudo apt autoclean && sudo apt clean";
 	}
 }
