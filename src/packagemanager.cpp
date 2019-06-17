@@ -9,12 +9,15 @@ void PackageManager::init(string pm) {
 	if(pm == "apt") {
 		// apt
 		search = "sudo apt search ";
+        list = "sudo apt list";
 		install = "sudo apt update && sudo apt install ";
+        reinstall = "sudo apt update && sudo apt reinstall ";
 		uninstall = "sudo apt purge ";
 		autoremove = "sudo apt purge --autoremove";
 		update = "sudo apt update";
 		upgrade = "sudo apt update && sudo apt upgrade";
 		upgrade_pkg = "sudo apt upgrade ";
+        add = "sudo apt edit-sources ";
 		clean = "sudo apt autoclean && sudo apt clean";
 	}
 }
