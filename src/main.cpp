@@ -17,6 +17,7 @@
 string ConfigPath = "/usr/local/etc/nvs/nvs";
 string CustomPath = "/usr/local/etc/nvs/custom";
 
+//This is the default help message that gets displayed when user types the nvs help command.
 const char * HelpMsg =
   "Novus CLI Help\n"
 "nvs [command] <query>\n"
@@ -34,6 +35,7 @@ const char * HelpMsg =
 "help\t\t\t\tOpen this help page\n"
 "about\t\t\t\tView legal information\n\n";
 
+//This is the about message that gets displayed when user types the nvs about command.
 const char * AboutMsg =
   "About Novus CLI\n"
 "Copyright (C) 2019 Polar Development.\n"
@@ -61,6 +63,8 @@ const char * AboutMsg =
 "Project Serna by Diego Magdaleno & Diatrus: https://sernarepo.com/";
 
 // Default syntax operations
+//If you consider you can add more to the syntax is very simple, start here by adding a descriptive structure, this means if your command executes "apt cow" for example, your string should be named "CowCmds"
+//After that perfom the selected by adding it below in this way "cow" and "--cow".
 vector < string > SearchCmds = {
   "search",
   "--search"
@@ -180,14 +184,6 @@ int main(int argc, char * argv[]) {
     exit(1);
   }
 
-  PackageManager pm;
-  string execcmd; // Will be appended with packages
-
-  // If the user declares his own package manager
-  if (file_exists(CustomPath.c_str())) {
-    pm.customPM(CustomPath);
-  }
-
   // If sysget_config does not exists use defaults
   else {
     pm.init(pm_config);
@@ -204,9 +200,9 @@ int main(int argc, char * argv[]) {
   // Lets set argv[1] to cmd for a more handy usage
   string cmd = argv[1];
 
-  if (VectorContains(cmd, SearchCmds)) {
+  if (VectorContains(cmd, SearchCmds)) { //This is the "Search command and a little explanation on how it works"
     // If the user enters no search query
-    if (argc < 3) {
+    if (argc < 3) { //This checks if user actually introduced a package name, if no it's going to return an erorr for the user
       cerr << "Error, no search query provided" << endl;
       exit(1);
     }
@@ -214,13 +210,13 @@ int main(int argc, char * argv[]) {
     system(string(pm.search + argv[2]).c_str());
   }
 
-  if (VectorContains(cmd, ListCmds)) {
+  if (VectorContains(cmd, ListCmds)) { //This is the info command, gets info about a package and displays it to user 
     checkcmd(pm.list);
     system(pm.list.c_str());
   } else if (VectorContains(cmd, InfoCmds)) {
-    // If the user enters no package to install
+    // If the user enters no package to to get info from
     if (argc < 3) {
-      cerr << "Error, no package for the installation provided" << endl;
+      cerr << "Error, no package to get info from was provided." << endl;
       exit(1);
     }
 
@@ -244,7 +240,7 @@ int main(int argc, char * argv[]) {
 
     system(string(pm.install + execcmd).c_str());
   } else if (VectorContains(cmd, ReinstallCmds)) {
-    // If the user enters no package to install
+    // If the user enters no package to reinstall
     if (argc < 3) {
       cerr << "Error, no package for the reinstallation provided" << endl;
       exit(1);
