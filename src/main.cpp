@@ -210,10 +210,12 @@ int main(int argc, char * argv[]) {
     system(string(pm.search + argv[2]).c_str());
   }
 
-  if (VectorContains(cmd, ListCmds)) { //This is the info command, gets info about a package and displays it to user 
+  else if (VectorContains(cmd, ListCmds)) { //This is the list command, lists all the packages and displays them to the user.
     checkcmd(pm.list);
     system(pm.list.c_str());
-  } else if (VectorContains(cmd, InfoCmds)) {
+  } 
+
+  else if (VectorContains(cmd, InfoCmds)) { //This is the info
     // If the user enters no package to to get info from
     if (argc < 3) {
       cerr << "Error, no package to get info from was provided." << endl;
@@ -226,7 +228,9 @@ int main(int argc, char * argv[]) {
     }
 
     system(string(pm.info + execcmd).c_str());
-  } else if (VectorContains(cmd, InstallCmds)) {
+  } 
+
+  else if (VectorContains(cmd, InstallCmds)) { //This is the install command, installs packages for the user
     // If the user enters no package to install
     if (argc < 3) {
       cerr << "Error, no package for the installation provided" << endl;
@@ -239,7 +243,9 @@ int main(int argc, char * argv[]) {
     }
 
     system(string(pm.install + execcmd).c_str());
-  } else if (VectorContains(cmd, ReinstallCmds)) {
+  } 
+
+  else if (VectorContains(cmd, ReinstallCmds)) { //This is the reinstall command, reinstalls packages for the user
     // If the user enters no package to reinstall
     if (argc < 3) {
       cerr << "Error, no package for the reinstallation provided" << endl;
@@ -255,7 +261,7 @@ int main(int argc, char * argv[]) {
   }
 
   //If the user wants to add a repo
-  else if (VectorContains(cmd, AddCmds)) {
+  else if (VectorContains(cmd, AddCmds)) { //This is the add command, opens the apt repo editor in order for user to add his favorite repos
     for (int i = 2; i < argc; i++) {
       checkcmd(pm.add);
       execcmd = execcmd + argv[i] + " ";
@@ -263,7 +269,8 @@ int main(int argc, char * argv[]) {
 
     system(string(pm.add + execcmd).c_str());
 
-  } else if (VectorContains(cmd, RemoveCmds)) {
+  } 
+  else if (VectorContains(cmd, RemoveCmds)) { //This is the remove command, removes packages that where installed before
     // If the user enters no package to remove
     if (argc < 3) {
       cerr << "Error, no package for the removal provided" << endl;
@@ -278,16 +285,13 @@ int main(int argc, char * argv[]) {
     system(string(pm.uninstall + execcmd).c_str());
   }
 
-  // FYI: checkcmd will check if your package manager supports this feature
-
   // Autoremove will remove orpahns
-  else if (VectorContains(cmd, AutoremoveCmds)) {
+  else if (VectorContains(cmd, AutoremoveCmds)) { //This is the autoremove commnad, removes packages that arent needed anymore they are alos know as orphans
     checkcmd(pm.autoremove);
     system(pm.autoremove.c_str());
   }
 
-  // Upgrading will not update the database
-  else if (VectorContains(cmd, UpgradeCmds)) {
+  else if (VectorContains(cmd, UpgradeCmds)) { //This is the upgrade commnad, it also updates the data base, so user forgets about running "nvs update"
     if (argc < 3) {
       checkcmd(pm.upgrade);
       system(pm.upgrade.c_str());
@@ -305,24 +309,24 @@ int main(int argc, char * argv[]) {
   }
 
   // Clean will clean the download cache
-  else if (VectorContains(cmd, CleanCmds)) {
+  else if (VectorContains(cmd, CleanCmds)) { //This is the clean commnad, cleans the cache 
     checkcmd(pm.clean);
     system(pm.clean.c_str());
   }
 
   // Update will only refresh the database		
-  else if (VectorContains(cmd, UpdateCmds)) {
+  else if (VectorContains(cmd, UpdateCmds)) { //This is the update command, its going to refresh the packages data base
     checkcmd(pm.update);
     system(pm.update.c_str());
   }
 
   // Help
-  else if (VectorContains(cmd, HelpCmds)) {
+  else if (VectorContains(cmd, HelpCmds)) { //This command allows users to display the help sheet that we showed at the start 
     cout << HelpMsg;
   }
 
   // About
-  else if (VectorContains(cmd, AboutCmds)) {
+  else if (VectorContains(cmd, AboutCmds)) { //This command displays the legal information 
     cout << AboutMsg;
   } else {
     cerr << "Unknown operation '" << cmd << "'. Try nvs help" << endl;
