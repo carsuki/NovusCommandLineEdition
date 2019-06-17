@@ -6,18 +6,16 @@
 // This is the constructor
 void PackageManager::init(string pm) {
 
-	if(pm == "apt-get") {
-		// apt-get
-		add = "sudo apt edit-sources";
-		search = "sudo apt-cache search ";
-		install = "sudo apt-get update && sudo apt-get install ";
-		reinstall = "sudo apt-get update && sudo apt-get reinstall ";
-		uninstall = "sudo apt-get purge ";
-		autoremove = "sudo apt-get purge --autoremove";
-		upgrade = "sudo apt-get update && sudo apt-get upgrade";
-		update = "sudo apt-get update";		
-		upgrade_pkg = "sudo apt-get upgrade ";
-		clean = "sudo apt-get autoclean && sudo apt-get clean";
+	if(pm == "apt") {
+		// apt
+		search = "sudo apt search ";
+		install = "sudo apt update && sudo apt install ";
+		uninstall = "sudo apt purge ";
+		autoremove = "sudo apt purge --autoremove";
+		update = "sudo apt update";
+		upgrade = "sudo apt update && sudo apt upgrade";
+		upgrade_pkg = "sudo apt upgrade ";
+		clean = "sudo apt autoclean && sudo apt clean";
 	}
 }
 

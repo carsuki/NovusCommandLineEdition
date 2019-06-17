@@ -9,7 +9,7 @@ bool file_exists(const char *filename) {
 }
 
 vector<string> GetPackageManagerList() {
-	vector<string> PackageManagerList = { "apt-get"};
+	vector<string> PackageManagerList = { "apt"};
 	return PackageManagerList;
 }
 
