@@ -6,19 +6,18 @@
 // This is the constructor
 void PackageManager::init(string pm) {
 
-	if(pm == "apt") {
-		// apt
-		search = "sudo apt search ";
-        list = "apt list";
-		install = "sudo apt update && sudo apt install ";
-        reinstall = "sudo apt update && sudo apt reinstall ";
-		uninstall = "sudo apt purge ";
-		autoremove = "sudo apt purge --autoremove";
-		update = "sudo apt update";
-		upgrade = "sudo apt update && sudo apt upgrade";
-		upgrade_pkg = "sudo apt upgrade ";
-        add = "sudo apt edit-sources ";
-		clean = "sudo apt autoclean && sudo apt clean";
+	if(pm == "apt-get") {
+		// apt-get
+		add = "sudo apt edit-sources";
+		search = "sudo apt-cache search ";
+		install = "sudo apt-get update && sudo apt-get install ";
+		reinstall = "sudo apt-get update && sudo apt-get reinstall ";
+		uninstall = "sudo apt-get purge ";
+		autoremove = "sudo apt-get purge --autoremove";
+		update = "sudo apt-get update";
+		upgrade = "sudo apt-get upgrade";
+		upgrade_pkg = "sudo apt-get upgrade ";
+		clean = "sudo apt-get autoclean && sudo apt-get clean";
 	}
 }
 
@@ -32,5 +31,29 @@ void PackageManager::customPM(string filename) {
 			commands.push_back(line);
 			number_of_lines++;
 		}
-	}	
+
+		if(number_of_lines != 8) {
+			search = "exit=Invalid custom file";
+			install = "exit=Invalid custom file";
+			reinstall = "exit=Invalid custom file";
+			uninstall = "exit=Invalid custom file";
+			autoremove = "exit=Invalid custom file";
+			update = "exit=Invalid custom file";
+			upgrade = "exit=Invalid custom file";
+			upgrade_pkg = "exit=Invalid custom file";
+			clean = "exit=Invalid custom file";
+		}
+		
+		else {
+			search = commands[0];
+			install = commands[1];
+			reinstall = commands[2];
+			uninstall = commands[3];
+			autoremove = commands[4];
+			update = commands[5];
+			upgrade = commands[6];
+			upgrade_pkg = commands[7];
+			clean = commands[8];
+		}
+	}
 }
