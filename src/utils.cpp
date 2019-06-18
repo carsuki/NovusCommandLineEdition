@@ -24,6 +24,7 @@ bool file_exists(const char *filename) {
 	return (bool)file;
 }
 
+//This helps the const char you saw at the start of the file
 vector<string> GetPackageManagerList() {
 	vector<string> PackageManagerList = { "apt"};
 	return PackageManagerList;
