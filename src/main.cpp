@@ -8,10 +8,6 @@
 #include "packagemanager.hpp"
 #include "utils.hpp"
 
-// Default path for config files
-string ConfigPath = "apt";
-string CustomPath = "/usr/local/etc/nvs/custom";
-
 const char *pm = "apt";
 const char *pm_config = "apt";
 
@@ -76,26 +72,8 @@ vector<string> AboutCmds = {"about", "--about"};
 int main(int argc, char* argv[]) {
 	vector<string> PackageManagerList = GetPackageManagerList();
 
-	if(pm_config == "ERROR") {
-		cerr << "Your config is broken please restart the program to create a new one" << endl;
-		if(remove(ConfigPath.c_str()) != 0) {
-			cerr << "Error while deleting broken config file, are you root?" << endl;
-		}
-		exit(1);
-	}
-
 	PackageManager pm;
 	string execcmd;	// Will be appended with packages
-
-	// If the user declares his own package manager
-	if(file_exists(CustomPath.c_str())) {
-		pm.customPM(CustomPath);
-	}
-
-	// If sysget_config does not exists use defaults
-	else {
-		pm.init(pm_config);
-	}
 
 	// Now parse the console arguments
 	// If the user enters no operation
