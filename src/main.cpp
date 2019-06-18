@@ -75,6 +75,10 @@ int main(int argc, char* argv[]) {
 	PackageManager pm;
 	string execcmd;	// Will be appended with packages
 
+
+	// If sysget_config does not exists use defaults
+		pm.init(pm_config);
+
 	// Now parse the console arguments
 	// If the user enters no operation
 	if(argc < 2) {

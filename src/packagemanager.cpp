@@ -21,16 +21,3 @@ void PackageManager::init(string pm) {
 		clean = "sudo apt autoclean && sudo apt clean";
 	}
 }
-
-void PackageManager::customPM(string filename) {
-	ifstream file(filename);
-	string line;
-	vector<string> commands;
-	int number_of_lines = 0;
-	if(file.is_open()) {
-		while(getline(file ,line)) {
-			commands.push_back(line);
-			number_of_lines++;
-		}
-	}	
-}

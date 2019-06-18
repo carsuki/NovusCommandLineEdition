@@ -13,19 +13,6 @@ vector<string> GetPackageManagerList() {
 	return PackageManagerList;
 }
 
-void CreateConf(string filename, string packagemanager) {
-	system("mkdir -p /usr/local/etc/nvs");
-	ofstream file(filename);
-	if(file.is_open()) {
-		file << packagemanager;
-	}
-
-	else {
-		cout << "Unable to assign package manager, are you root ?" << endl;
-		exit(1);
-	}
-}
-
 // Check will check if the string contains an exit message
 void checkcmd(string cmd) {
 	size_t errorfind = cmd.find("exit=");
