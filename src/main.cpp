@@ -72,28 +72,26 @@ const char *AboutMsg =
 
 
 // Default syntax operations
-vector<string> SearchCmds = {"search", "--search"};
-vector<string> ListCmds = {"list", "--list"};
-vector<string> InstallCmds = {"install", "--install"};
-vector<string> ReinstallCmds = {"reinstall", "--reinstall"};
-vector<string> RemoveCmds = {"remove", "--remove"};
-vector<string> AddCmds= {"edit-sources", "--edit-sources"};
-vector<string> AutoremoveCmds = {"autoremove", "--autoremove"};
-vector<string> UpgradeCmds = {"upgrade", "--upgrade"};
-vector<string> UpdateCmds = {"update", "--update"};	
-vector<string> CleanCmds = {"clean", "--clean"};
-vector<string> HelpCmds = {"help", "--help"};
-vector<string> AboutCmds = {"about", "--about"};
+vector<string> SearchCmds = {"search", "--search"}; //Search a package 
+vector<string> ListCmds = {"list", "--list"}; //List the packages 
+vector<string> InstallCmds = {"install", "--install"}; //Install Packages
+vector<string> ReinstallCmds = {"reinstall", "--reinstall"}; //Reinstalls packages
+vector<string> RemoveCmds = {"remove", "--remove"}; //Removes the packages 
+vector<string> AddCmds= {"edit-sources", "--edit-sources"}; //Allows user to edit sources
+vector<string> AutoremoveCmds = {"autoremove", "--autoremove"}; //Removes orphan packages 
+vector<string> UpgradeCmds = {"upgrade", "--upgrade"}; //Upgrades selected packages
+vector<string> UpdateCmds = {"update", "--update"};	//Updates the data base
+vector<string> CleanCmds = {"clean", "--clean"}; //Cleans packages
+vector<string> HelpCmds = {"help", "--help"}; //Dislays help 
+vector<string> AboutCmds = {"about", "--about"}; //Displays legal stuff 
 
 int main(int argc, char* argv[]) {
 	vector<string> PackageManagerList = GetPackageManagerList();
 
+	//Inititializaes the package manager
 	PackageManager pm;
 	string execcmd;	// Will be appended with packages
-
-
-	// If sysget_config does not exists use defaults
-		pm.init(pm_config);
+	pm.init(pm_config);
 
 	// Now parse the console arguments
 	// If the user enters no operation
@@ -106,6 +104,8 @@ int main(int argc, char* argv[]) {
 	// Lets set argv[1] to cmd for a more handy usage
 	string cmd = argv[1];
 
+    //This is the search checks it does in order to perform the search action.
+	
 	if(VectorContains(cmd, SearchCmds)) {
 		// If the user enters no search query
 		if(argc < 3) {
@@ -116,10 +116,14 @@ int main(int argc, char* argv[]) {
 		system(string(pm.search + argv[2]).c_str());
 	}
     
+    //This is the list command, lists all packages for the user, as you can see there are not checks here
+
     if(VectorContains(cmd, ListCmds)) {
         checkcmd(pm.list);
         system(pm.list.c_str());
     }
+
+     //This is the install checks to see if user search package is valid
 
 	else if(VectorContains(cmd, InstallCmds)) {
 		// If the user enters no package to install
@@ -136,8 +140,9 @@ int main(int argc, char* argv[]) {
 		system(string(pm.install + execcmd).c_str());
 	}
     
+    //This is the reinstall checks to see if user search package is valid
     else if(VectorContains(cmd, ReinstallCmds)) {
-        // If the user enters no package to install
+        // If the user enters no package to reinstall
         if(argc < 3) {
             cerr << "Error, no package for the reinstallation provided" << endl;
             exit(1);
@@ -151,7 +156,7 @@ int main(int argc, char* argv[]) {
         system(string(pm.reinstall + execcmd).c_str());
     }
 
-	//If the user wants to add a repo
+	//This is the edit-sources command/addd command, if the user wants to add a repo
 	else if(VectorContains(cmd, AddCmds)) {
 		for(int i = 2; i < argc; i++) {
 			checkcmd(pm.add);
@@ -162,6 +167,7 @@ int main(int argc, char* argv[]) {
 		
 	}
 
+	//This is the remove checks to see if user search package is valid
 	else if(VectorContains(cmd, RemoveCmds)) {
 		// If the user enters no package to remove
 		if(argc < 3) {
@@ -227,6 +233,7 @@ int main(int argc, char* argv[]) {
 		cout << AboutMsg;
 	}
 
+	//In case user enters a undeclared operation
 	else {
 		cerr << "Unknown operation '" << cmd << "'. Try nvs help" << endl;
 		exit(1);
