@@ -38,44 +38,20 @@ NovusCLI is a lite version of the full Novus package manager (Coming later this 
 Getting started for contributing to NovusCLI is very easy, you just need to follow the instructions below if you wish to build from source.
 
 ### Prerequisites
-In order to start
-```
-Give examples
-```
+In order to start building NovusCLI, you are going to need to have Apple's developer tools installed or xcode for example. You can get those [here](https://developer.apple.com/xcode/).
+
+NovusCLI uses default Apple clang compiler so this is all you need, but getting MacPT is higly recommended.
 
 ### Installing
-A step by step series of examples that tell you how to get a development env running.
 
-Say what the step will be
+For installation NovusCLI makes it really easy:
 
-```
-Give the example
-```
+* cd into the directory
+* Run make 
+* Run sudo make install
+* Enjoy Novus commnad line edition!
 
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo.
-
-## 🔧 Running the tests <a name = "tests"></a>
-Explain how to run the automated tests for this system.
-
-### Break down into end to end tests
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-Explain what these tests test and why
-
-```
-Give an example
-```
+This are all the steps that you need to follow to get NovusCLI running on your system!
 
 ## 🎈 Usage <a name="usage"></a>
 Add notes about how to use the system.
