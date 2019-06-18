@@ -1,16 +1,28 @@
+//Copyright (c) 2019 Polar Team
+//Modifications Copyright (c) 2019 Polar Team
+
+//This program is free software: you can redistribute it and/or modify
+//it under the terms of the GNU General Public License as published by
+//the Free Software Foundation, either version 3 of the License, or
+//(at your option) any later version.
+
+//This program is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//GNU General Public License for more details.
+
+//You should have received a copy of the GNU General Public License
+//along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 // Copyright (c) 2018-2019 Emil Engler et al.
 // Distributed under the GNU GENERAL PUBLIC LICENSE Version 3, see the accompanying
-// file LICENSE.txt or <https://www.gnu.org/licenses/gpl-3.0.html>.
+// file LICENSE or <https://www.gnu.org/licenses/gpl-3.0.html>.
 #include <iostream>
 #include <vector>
 #include <string>
 #include <cstring>
 #include "packagemanager.hpp"
 #include "utils.hpp"
-
-// Default path for config files
-string ConfigPath = "apt";
-string CustomPath = "/usr/local/etc/nvs/custom";
 
 const char *pm = "apt";
 const char *pm_config = "apt";
@@ -60,42 +72,26 @@ const char *AboutMsg =
 
 
 // Default syntax operations
-vector<string> SearchCmds = {"search", "--search"};
-vector<string> ListCmds = {"list", "--list"};
-vector<string> InstallCmds = {"install", "--install"};
-vector<string> ReinstallCmds = {"reinstall", "--reinstall"};
-vector<string> RemoveCmds = {"remove", "--remove"};
-vector<string> AddCmds= {"edit-sources", "--edit-sources"};
-vector<string> AutoremoveCmds = {"autoremove", "--autoremove"};
-vector<string> UpgradeCmds = {"upgrade", "--upgrade"};
-vector<string> UpdateCmds = {"update", "--update"};	
-vector<string> CleanCmds = {"clean", "--clean"};
-vector<string> HelpCmds = {"help", "--help"};
-vector<string> AboutCmds = {"about", "--about"};
+vector<string> SearchCmds = {"search", "--search"}; //Search a package 
+vector<string> ListCmds = {"list", "--list"}; //List the packages 
+vector<string> InstallCmds = {"install", "--install"}; //Install Packages
+vector<string> ReinstallCmds = {"reinstall", "--reinstall"}; //Reinstalls packages
+vector<string> RemoveCmds = {"remove", "--remove"}; //Removes the packages 
+vector<string> AddCmds= {"edit-sources", "--edit-sources"}; //Allows user to edit sources
+vector<string> AutoremoveCmds = {"autoremove", "--autoremove"}; //Removes orphan packages 
+vector<string> UpgradeCmds = {"upgrade", "--upgrade"}; //Upgrades selected packages
+vector<string> UpdateCmds = {"update", "--update"};	//Updates the data base
+vector<string> CleanCmds = {"clean", "--clean"}; //Cleans packages
+vector<string> HelpCmds = {"help", "--help"}; //Dislays help 
+vector<string> AboutCmds = {"about", "--about"}; //Displays legal stuff 
 
 int main(int argc, char* argv[]) {
 	vector<string> PackageManagerList = GetPackageManagerList();
 
-	if(pm_config == "ERROR") {
-		cerr << "Your config is broken please restart the program to create a new one" << endl;
-		if(remove(ConfigPath.c_str()) != 0) {
-			cerr << "Error while deleting broken config file, are you root?" << endl;
-		}
-		exit(1);
-	}
-
+	//Inititializaes the package manager
 	PackageManager pm;
 	string execcmd;	// Will be appended with packages
-
-	// If the user declares his own package manager
-	if(file_exists(CustomPath.c_str())) {
-		pm.customPM(CustomPath);
-	}
-
-	// If sysget_config does not exists use defaults
-	else {
-		pm.init(pm_config);
-	}
+	pm.init(pm_config);
 
 	// Now parse the console arguments
 	// If the user enters no operation
@@ -108,6 +104,8 @@ int main(int argc, char* argv[]) {
 	// Lets set argv[1] to cmd for a more handy usage
 	string cmd = argv[1];
 
+    //This is the search checks it does in order to perform the search action.
+	
 	if(VectorContains(cmd, SearchCmds)) {
 		// If the user enters no search query
 		if(argc < 3) {
@@ -118,10 +116,14 @@ int main(int argc, char* argv[]) {
 		system(string(pm.search + argv[2]).c_str());
 	}
     
+    //This is the list command, lists all packages for the user, as you can see there are not checks here
+
     if(VectorContains(cmd, ListCmds)) {
         checkcmd(pm.list);
         system(pm.list.c_str());
     }
+
+     //This is the install checks to see if user search package is valid
 
 	else if(VectorContains(cmd, InstallCmds)) {
 		// If the user enters no package to install
@@ -138,8 +140,9 @@ int main(int argc, char* argv[]) {
 		system(string(pm.install + execcmd).c_str());
 	}
     
+    //This is the reinstall checks to see if user search package is valid
     else if(VectorContains(cmd, ReinstallCmds)) {
-        // If the user enters no package to install
+        // If the user enters no package to reinstall
         if(argc < 3) {
             cerr << "Error, no package for the reinstallation provided" << endl;
             exit(1);
@@ -153,7 +156,7 @@ int main(int argc, char* argv[]) {
         system(string(pm.reinstall + execcmd).c_str());
     }
 
-	//If the user wants to add a repo
+	//This is the edit-sources command/addd command, if the user wants to add a repo
 	else if(VectorContains(cmd, AddCmds)) {
 		for(int i = 2; i < argc; i++) {
 			checkcmd(pm.add);
@@ -164,6 +167,7 @@ int main(int argc, char* argv[]) {
 		
 	}
 
+	//This is the remove checks to see if user search package is valid
 	else if(VectorContains(cmd, RemoveCmds)) {
 		// If the user enters no package to remove
 		if(argc < 3) {
@@ -229,6 +233,7 @@ int main(int argc, char* argv[]) {
 		cout << AboutMsg;
 	}
 
+	//In case user enters a undeclared operation
 	else {
 		cerr << "Unknown operation '" << cmd << "'. Try nvs help" << endl;
 		exit(1);
