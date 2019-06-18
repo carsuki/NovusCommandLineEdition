@@ -9,7 +9,7 @@ void PackageManager::init(string pm) {
 	if(pm == "apt") {
 		// apt
 		search = "sudo apt search ";
-        list = "sudo apt list";
+        list = "apt list";
 		install = "sudo apt update && sudo apt install ";
         reinstall = "sudo apt update && sudo apt reinstall ";
 		uninstall = "sudo apt purge ";
