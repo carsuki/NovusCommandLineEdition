@@ -23,7 +23,6 @@
 ## 📝 Table of Contents
 - [About](#about)
 - [Getting Started](#getting_started)
-- [Deployment](#deployment)
 - [Usage](#usage)
 - [Built Using](#built_using)
 - [TODO](../TODO.md)
@@ -54,16 +53,27 @@ For installation NovusCLI makes it really easy:
 This are all the steps that you need to follow to get NovusCLI running on your system!
 
 ## 🎈 Usage <a name="usage"></a>
-Add notes about how to use the system.
+NovusCLI has a memorable set of commands that will allow you to use it everyday as your syntax for MacPT:
 
-## 🚀 Deployment <a name = "deployment"></a>
-Add additional notes about how to deploy this on a live system.
+* ```nvs search [query]``` - Searches for a package in your resporitories
+* ```list```  - Lists all packages in your resporitories
+* ```nvs install [package]``` - Installs a package 
+* ```reinstall [package]``` - Reinstalls a package
+* ``` remove [package]``` - Removes a package
+* ```edit-sources``` - Opens the APT repo editor
+* ```autoremove``` - Removes unneeded packages (orphans)
+* ```update``` - Update the repo lists
+* ```upgrade``` - Upgrade all packages
+* ```clean``` - Clear the download cache
+* ```help``` - Open a help page similar to this one
+* ```about``` - View legal information
+
+Using NovusCLI is a lot of fun, as you see, and it doesnt require you to use the "sudo" prefix.
 
 ## ⛏️ Built Using <a name = "built_using"></a>
-- [MongoDB](https://www.mongodb.com/) - Database
-- [Express](https://expressjs.com/) - Server Framework
-- [VueJs](https://vuejs.org/) - Web Framework
-- [NodeJs](https://nodejs.org/en/) - Server Environment
+- [C++](http://www.cplusplus.com/) - Main programming language.
+- [MacPT](https://github.com/DiegoMagdaIeno/MacPT) - Backend/Package manager.
+- [Project Serna](https://sernarepo.com/) - Main repository.
 
 ## ✍️ Authors <a name = "authors"></a>
 - [@DiegoMagdaleno](https://github.com/DiegoMagdaIeno) - NVS build and implementation.
