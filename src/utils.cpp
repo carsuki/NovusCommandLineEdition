@@ -13,34 +13,6 @@ vector<string> GetPackageManagerList() {
 	return PackageManagerList;
 }
 
-string GetPackageManager(string filename) {
-	string line;
-	string packagemanager;
-	ifstream file(filename);
-
-	vector<string> PackageManagerList = GetPackageManagerList();
-
-	if(file.is_open()) {
-		while(getline(file, line)) {
-			// If the package manager is valid
-			if(std::find(PackageManagerList.begin(), PackageManagerList.end(), line) != PackageManagerList.end()) {
-				return line;
-			}
-
-			else {
-				return "ERROR";
-			}
-		}
-	}
-
-	else {
-		cout << "Unable to open config file" << endl;
-		exit(1);
-	}
-	// clang on macOS will return a warning if a non-void function has no return
-	return "ERROR";
-}
-
 void CreateConf(string filename, string packagemanager) {
 	system("mkdir -p /usr/local/etc/nvs");
 	ofstream file(filename);

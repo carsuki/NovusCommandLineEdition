@@ -22,7 +22,6 @@ install:
 	cp build/nvs $(DESTDIR)/usr/local/bin/
 	mkdir -p $(DESTDIR)/usr/local/etc/nvs
 	mkdir -p $(DESTDIR)/usr/local/etc/bash_completion.d/nvs
-	cp additional_resources/nvs $(DESTDIR)/usr/local/etc/nvs/nvs
 	cp contrib/nvs.bash-completion $(DESTDIR)/usr/local/etc/bash_completion.d/nvs
 
 clean:

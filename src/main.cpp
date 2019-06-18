@@ -9,8 +9,11 @@
 #include "utils.hpp"
 
 // Default path for config files
-string ConfigPath = "/usr/local/etc/nvs/nvs";
+string ConfigPath = "apt";
 string CustomPath = "/usr/local/etc/nvs/custom";
+
+const char *pm = "apt";
+const char *pm_config = "apt";
 
 const char *HelpMsg =
 	"Novus CLI Help\n"
@@ -72,58 +75,6 @@ vector<string> AboutCmds = {"about", "--about"};
 
 int main(int argc, char* argv[]) {
 	vector<string> PackageManagerList = GetPackageManagerList();
-
-	// Get the path if the user has changed it with an enviroment variable
-	char* EnvConfigPath = getenv("SYSGET_CONFIG_PATH");
-	char* EnvCustomPath = getenv("SYSGET_CUSTOM_PATH");
-
-	// Check if the enviroment variables aren't empty
-	if(EnvConfigPath != NULL) {
-		ConfigPath = string(EnvConfigPath);
-	}
-
-	if(EnvCustomPath != NULL) {
-		CustomPath = string(EnvCustomPath);
-	}
-	
-	// Create a config file if the config file does not exists
-	if(!file_exists(ConfigPath.c_str())) {
-		cout << "Please choose a package manager: " << endl;
-
-		for(unsigned int i = 0; i < PackageManagerList.size(); i++) {
-			cout << (i+1) << ". " << PackageManagerList[i] << endl;
-		}
-
-		cout << endl;
-
-		// Now lets listen for the input
-		string input;
-		cin >> input;
-		// Convert the input to an int to see if it is valid
-		unsigned int InputInt;
-		try {
-			InputInt = stoi(input);
-		}
-		catch(exception&) {
-			cerr << "You need to enter a number" << endl;
-			exit(1);
-		}
-
-		// Create config files
-
-		// Finally check if the input is valid
-		if(InputInt > PackageManagerList.size() || InputInt <= 0) {
-			cerr << "Input is out of range" << endl;
-			exit(1);
-		}
-
-		// We need to reduce the input by 1 because arrays start at 0
-		CreateConf(ConfigPath, PackageManagerList[InputInt -1] + "\n");
-
-	}
-
-	// Get the name of the package manager from the config file
-	string pm_config = GetPackageManager(ConfigPath);
 
 	if(pm_config == "ERROR") {
 		cerr << "Your config is broken please restart the program to create a new one" << endl;
