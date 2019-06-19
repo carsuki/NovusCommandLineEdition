@@ -32,5 +32,6 @@ NOTE: Spaces are VERY important because we need them to append other strings to 
 struct PackageManager {
 	string search, install, reinstall, list, add, uninstall, autoremove, update, upgrade, upgrade_pkg, clean;
 	void init(string pm);
+	void customPM(string filename);
 };
 #endif

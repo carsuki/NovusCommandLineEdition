@@ -72,7 +72,7 @@ const char *AboutMsg =
 
 
 // Default syntax operations
-vector<string> SearchCmds = {"search", "--search"}; //Search a package 
+vector<string> SearchCmds = {"search", "--search"};
 vector<string> ListCmds = {"list", "--list"}; //List the packages 
 vector<string> InstallCmds = {"install", "--install"}; //Install Packages
 vector<string> ReinstallCmds = {"reinstall", "--reinstall"}; //Reinstalls packages
@@ -108,9 +108,9 @@ int main(int argc, char* argv[]) {
 	
 	if(VectorContains(cmd, SearchCmds)) {
 		// If the user enters no search query
-		if(argc < 3) {
-			cerr << "Error, no search query provided" << endl;
-			exit(1);
+		if(argc < 3) {		
+			cerr << "Error, no search query provided" << endl;		
+			exit(1);				
 		}
 		checkcmd(pm.search);
 		system(string(pm.search + argv[2]).c_str());
@@ -118,7 +118,7 @@ int main(int argc, char* argv[]) {
     
     //This is the list command, lists all packages for the user, as you can see there are not checks here
 
-    if(VectorContains(cmd, ListCmds)) {
+    else if(VectorContains(cmd, ListCmds)) {
         checkcmd(pm.list);
         system(pm.list.c_str());
     }
