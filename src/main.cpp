@@ -33,6 +33,7 @@ const char *HelpMsg =
 	"\n"
 	"search [query]\t\t\tSearches for a package in your resporitories\n"
     "list\t\t\t\tLists all packages in your resporitories\n"
+    "info[package]\t\tDisplays information of a selected package\n"
 	"install [package]\t\tInstalls a package\n"
 	"reinstall [package]\t\tReinstalls a package\n"
 	"remove [package]\t\tRemoves a package\n"
@@ -74,6 +75,7 @@ const char *AboutMsg =
 // Default syntax operations
 vector<string> SearchCmds = {"search", "--search"};
 vector<string> ListCmds = {"list", "--list"}; //List the packages 
+vector<string> InfoCmds = {"info", "--info"}; //Gets info a selected package
 vector<string> InstallCmds = {"install", "--install"}; //Install Packages
 vector<string> ReinstallCmds = {"reinstall", "--reinstall"}; //Reinstalls packages
 vector<string> RemoveCmds = {"remove", "--remove"}; //Removes the packages 
@@ -123,6 +125,8 @@ int main(int argc, char* argv[]) {
         system(pm.list.c_str());
     }
 
+    else if 
+
      //This is the install checks to see if user search package is valid
 
 	else if(VectorContains(cmd, InstallCmds)) {
@@ -158,15 +162,10 @@ int main(int argc, char* argv[]) {
 
 	//This is the edit-sources command/addd command, if the user wants to add a repo
 	else if(VectorContains(cmd, AddCmds)) {
-		for(int i = 2; i < argc; i++) {
 			checkcmd(pm.add);
-			execcmd = execcmd + argv[i] + " ";
+			system(pm.add.c_str());
 		}
-
-		system(string(pm.add + execcmd).c_str());
-		
-	}
-
+	
 	//This is the remove checks to see if user search package is valid
 	else if(VectorContains(cmd, RemoveCmds)) {
 		// If the user enters no package to remove
