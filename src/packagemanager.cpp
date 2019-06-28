@@ -26,6 +26,7 @@ void PackageManager::init(string pm) {
 		// apt default operations
 		search = "apt search ";
         list = "apt list";
+        info = "apt info ";
 		install = "sudo apt update && sudo apt install ";
         reinstall = "sudo apt update && sudo apt reinstall ";
 		uninstall = "sudo apt purge ";

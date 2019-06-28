@@ -125,7 +125,15 @@ int main(int argc, char* argv[]) {
         system(pm.list.c_str());
     }
 
-    else if 
+    else if(VectorContains(cmd, InfoCmds)) {
+		// If the user enters no search query
+		if(argc < 3) {		
+			cerr << "Error, package to get information from" << endl;		
+			exit(1);				
+		}
+		checkcmd(pm.info);
+		system(string(pm.info + argv[2]).c_str());
+	} 
 
      //This is the install checks to see if user search package is valid
 
