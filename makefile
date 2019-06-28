@@ -20,7 +20,6 @@ utils.o: src/utils.hpp src/utils.cpp
 install:
 	mkdir -p $(DESTDIR)/usr/local/bin/
 	cp build/nvs $(DESTDIR)/usr/local/bin/
-	mkdir -p $(DESTDIR)/usr/local/etc/nvs
 	mkdir -p $(DESTDIR)/usr/local/etc/bash_completion.d/nvs
 	cp contrib/nvs.bash-completion $(DESTDIR)/usr/local/etc/bash_completion.d/nvs
 
