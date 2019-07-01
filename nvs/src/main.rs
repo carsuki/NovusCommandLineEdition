@@ -76,6 +76,10 @@ fn main() {
 			//Runs sudo apt edit-sources + second argument user inputted.
 			Command::new("sudo").arg("apt").arg("edit-sources").arg(&args[2]).status().expect("Something went wrong.");
 			process::exit(0);
+		} else if args[1] == "info" && args[2] == args[2] {
+			//Runs apt info + second argument user inputted.
+			Command::new("apt").arg("info").arg(&args[2]).status().expect("Something went wrong.");
+			process::exit(0);
 		} else {
 			eprintln!("Unknown operation {:?}. Type \"nvs help\" to see the list of available commands.", args[1]);
 			process::exit(1);
