@@ -7,7 +7,7 @@ fn main() {
 	let args: Vec<String> = env::args().collect();
 	//For some reason no arguments are equal to one so this checks if there are no arguments and prints this help message with an error at the end.
 	if args.len() == 1 {
-		eprintln!("Novus CLI Help\nnvs [command] <query>\n\nsearch [query]\t\t\tSearches for a package in your resporitories\nlist\t\t\t\tLists all packages in your resporitories\ninfo [package]\t\t\tDisplays information of a selected package\ninstall [package]\t\tInstalls a package\nreinstall [package]\t\tReinstalls a package\nremove [package]\t\tRemoves a package\nedit-sources\t\t\tOpens the APT repo editor\nautoremove\t\t\tRemoves unneeded packages (orphans)\nupdate\t\t\t\tUpdate the repo lists\nupgrade\t\t\t\tUpgrade all packages\nclean\t\t\t\tClear the download cache\nhelp\t\t\t\tOpen this help page\nabout\t\t\t\tView legal information\n\nYou entered an invalid command, look above for a list of available commands.");
+		eprintln!("Novus CLI Help\nnvs [command] <query>\n\nsearch [query]\t\t\tSearches for a package in your resporitories\nlist\t\t\t\tLists all packages in your resporitories\ninfo [package]\t\t\tDisplays information of a selected package\ninstall [package]\t\tInstalls a package\nreinstall [package]\t\tReinstalls a package\nremove [package]\t\tRemoves a package\nedit-sources\t\t\tOpens the APT repo editor\nautoremove\t\t\tRemoves unneeded packages (orphans)\nupdate\t\t\t\tUpdate the repo lists\nupgrade\t\t\t\tUpgrade all packages\nclean\t\t\t\tClear the download cache\nhelp\t\t\t\tOpen this help page\nabout\t\t\t\tView legal information\n");
 		process::exit(1);
 		//For some reason 1 argument is equal to two so this checks if there is 1 argument.
 	} else if args.len() == 2 {
